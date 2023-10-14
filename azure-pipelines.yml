@@ -21,4 +21,7 @@ steps:
   - script: "mvn test -D suite=single.xml"
     displayName: "Command Line Script"
   - task: LambdatestResults@1
+    displayName: "Lambdatest Results"
+    env:
+      LT_BUILD_NAME: Test_Sample_Java
 
