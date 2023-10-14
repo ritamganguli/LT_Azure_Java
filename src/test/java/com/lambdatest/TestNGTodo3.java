@@ -29,8 +29,8 @@ public class TestNGTodo3 {
         caps.setCapability("platform", "MacOS Catalina");
         caps.setCapability("browserName", "Chrome");
         caps.setCapability("version", "latest");
+        caps.setCapability("build",System.getenv("LT_BUILD_NAME"));
         caps.setCapability("build_name",System.getenv("LT_BUILD_NAME"));
-        caps.setCapability("build", "TestNG With Java");
         caps.setCapability("plugin", "git-testng");
 
         String[] Tags = new String[] { "Feature", "Tag", "Moderate" };
