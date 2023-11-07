@@ -103,7 +103,7 @@ public class TestNGTodo1 {
 
     @AfterMethod
     public void tearDown() {
-        driver.executeScript("lambda-status=" + Status);
+        driver.executeScript("lambda-status=" + "failed");
         driver.quit();
     }
 
