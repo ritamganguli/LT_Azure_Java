@@ -31,7 +31,6 @@ public class TestNGTodo1 {
         caps.setCapability("version", "latest");
         caps.setCapability("build_name",System.getenv("LT_BUILD_NAME"));
         caps.setCapability("build",System.getenv("LT_BUILD_NAME"));
-        caps.setCapability("name", m.getName() + " - " + this.getClass().getName());
         caps.setCapability("plugin", "git-testng");
 
         String[] Tags = new String[] { "Feature", "Falcon", "Severe" };
