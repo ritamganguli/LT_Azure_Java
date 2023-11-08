@@ -10,9 +10,9 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-- stage: Stage1
+- stage: Runnig Job On Lambdatest
   jobs:
-  - job: Job1
+  - job: Lamdatest-ML-Run
     steps:
     - task: configuration@1
       inputs:
@@ -25,9 +25,9 @@ stages:
     - script: "mvn test -D suite=single.xml"
       displayName: "Command Line Script"
 
-- stage: Stage2
+- stage: Results
   jobs:
-  - job: Job2
+  - job: Lamdatest-Results
     steps:
     - task: LambdatestResults@1
 
