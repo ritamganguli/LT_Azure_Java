@@ -18,4 +18,11 @@ stages:
   jobs:
   - job: Job2
     steps:
+    - task: configuration@1
+      inputs:
+        connection: 'ritam_test'
+        isTunnelActivate: false
+        isAppAutomate: true
+        isSmartUI: false
     - task: LambdatestResults@1
+
