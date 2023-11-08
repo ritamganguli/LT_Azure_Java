@@ -22,6 +22,7 @@ stages:
     - script: |
         mvn test -D suite=single.xml
       displayName: "Command Line Script"
+    - task: LambdatestResults@1
 
 - stage: LambdatestResults
   jobs:
