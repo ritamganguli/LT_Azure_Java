@@ -15,6 +15,7 @@ stages:
       displayName: "Command Line Script"
 
 - stage: Stage2
+  dependsOn: Stage1  # Make Stage2 depend on Stage1
   jobs:
   - job: Job2
     steps:
@@ -25,4 +26,3 @@ stages:
         isAppAutomate: false
         isSmartUI: false
     - task: LambdatestResults@1
-
