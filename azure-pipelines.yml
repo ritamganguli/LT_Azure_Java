@@ -22,8 +22,5 @@ stages:
     - script: |
         mvn test -D suite=single.xml
       displayName: "Command Line Script"
-
-  - job: LambdatestResultsJob
-    steps:
     - task: LambdatestResults@1
       # Configure inputs for the LambdatestResults task here
