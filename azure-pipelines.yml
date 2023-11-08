@@ -14,6 +14,9 @@ stages:
   jobs:
   - job: Lamdatest-ML-Run
     steps:
+    - task: configuration@1
+      inputs:
+        connection: 'ritam_test'
     - script: |
         mvn clean install -DskipTests
     - script: "mvn test -D suite=single.xml"
