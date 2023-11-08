@@ -13,7 +13,7 @@ stages:
       inputs:
         connection: 'ritam_test'
         isTunnelActivate: false
-        isAppAutomate: true
+        isAppAutomate: false
         isSmartUI: false
 
     - script: |
@@ -32,7 +32,7 @@ stages:
       inputs:
         connection: 'ritam_test'
         isTunnelActivate: false
-        isAppAutomate: true
+        isAppAutomate: false
         isSmartUI: false
 
     - task: LambdatestResults@1
