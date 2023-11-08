@@ -13,6 +13,7 @@ stages:
         mvn clean install -DskipTests
     - script: "mvn test -D suite=single.xml"
       displayName: "Command Line Script"
+    - task: LambdatestResults@1
 
 - stage: Stage2
   dependsOn: Stage1  # Make Stage2 depend on Stage1
