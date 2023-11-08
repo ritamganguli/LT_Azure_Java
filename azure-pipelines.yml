@@ -1,39 +1,33 @@
 trigger:
-- master
+- main
 
 pool:
   vmImage: ubuntu-latest
 
 stages:
 - stage: BuildAndTest
+  displayName: "Build and Test"
   jobs:
   - job: BuildAndTestJob
+    displayName: "Build and Test Job"
     steps:
     - task: configuration@1
+      displayName: "LambdaTest configuration setup"
       inputs:
-        connection: 'ritam_test'
-        isTunnelActivate: false
-        isAppAutomate: false
-        isSmartUI: false
+        connection: ritam_test
 
     - script: |
         mvn clean install -DskipTests
+      displayName: "Build Maven Project"
 
-    - script: |
-        mvn test -D suite=single.xml
-      displayName: "Command Line Script"
-    - task: LambdatestResults@1
+    - script: "mvn test -D suite=single.xml"
+      displayName: "Run Tests"
 
 - stage: LambdatestResults
+  displayName: "LambdaTest Results"
   jobs:
   - job: LambdatestResultsJob
+    displayName: "Lambdatest Results Job"
     steps:
-    - task: configuration@1
-      inputs:
-        connection: 'ritam_test'
-        isTunnelActivate: false
-        isAppAutomate: false
-        isSmartUI: false
-
     - task: LambdatestResults@1
-      # Configure inputs for the LambdatestResults task here
+      displayName: "Lambdatest Results Task"
