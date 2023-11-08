@@ -5,25 +5,25 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-- stage: Stage1
+- stage: BuildAndTest
   jobs:
-  - job: Job1
-    steps:
-    - script: |
-        mvn clean install -DskipTests
-    - script: "mvn test -D suite=single.xml"
-      displayName: "Command Line Script"
-    - task: LambdatestResults@1
-
-- stage: Stage2
-  dependsOn: Stage1  # Make Stage2 depend on Stage1
-  jobs:
-  - job: Job2
+  - job: BuildAndTestJob
     steps:
     - task: configuration@1
       inputs:
         connection: 'ritam_test'
         isTunnelActivate: false
-        isAppAutomate: false
+        isAppAutomate: true
         isSmartUI: false
+
+    - script: |
+        mvn clean install -DskipTests
+
+    - script: |
+        mvn test -D suite=single.xml
+      displayName: "Command Line Script"
+
+  - job: LambdatestResultsJob
+    steps:
     - task: LambdatestResults@1
+      # Configure inputs for the LambdatestResults task here
