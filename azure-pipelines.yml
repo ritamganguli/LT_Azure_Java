@@ -28,12 +28,5 @@ stages:
   jobs:
   - job: LambdatestResultsJob
     steps:
-    - task: configuration@1
-      inputs:
-        connection: 'ritam_test'
-        isTunnelActivate: false
-        isAppAutomate: true
-        isSmartUI: false
-
     - task: LambdatestResults@1
       # Configure inputs for the LambdatestResults task here
