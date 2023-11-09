@@ -23,11 +23,5 @@ stages:
     - script: "mvn test -D suite=single.xml"
       displayName: "Run Tests"
 
-- stage: LambdatestResults
-  displayName: "LambdaTest Results"
-  jobs:
-  - job: LambdatestResultsJob
-    displayName: "Lambdatest Results Job"
-    steps:
+
     - task: LambdatestResults@1
-      displayName: "Lambdatest Results Task"
