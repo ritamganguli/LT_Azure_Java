@@ -6,22 +6,34 @@ pool:
 
 stages:
 - stage: BuildAndTest
-  displayName: "Build and Test"
   jobs:
   - job: BuildAndTestJob
-    displayName: "Build and Test Job"
     steps:
     - task: configuration@1
-      displayName: "LambdaTest configuration setup"
       inputs:
-        connection: ritam_test
+        connection: 'ritam_test'
+        isTunnelActivate: false
+        isAppAutomate: true
+        isSmartUI: false
 
     - script: |
         mvn clean install -DskipTests
-      displayName: "Build Maven Project"
 
-    - script: "mvn test -D suite=single.xml"
-      displayName: "Run Tests"
+    - script: |
+        mvn test -D suite=single.xml
+      displayName: "Command Line Script"
+    - task: LambdatestResults@1
 
+- stage: LambdatestResults
+  jobs:
+  - job: LambdatestResultsJob
+    steps:
+    - task: configuration@1
+      inputs:
+        connection: 'ritam_test'
+        isTunnelActivate: false
+        isAppAutomate: true
+        isSmartUI: false
 
     - task: LambdatestResults@1
+      # Configure inputs for the LambdatestResults task here
