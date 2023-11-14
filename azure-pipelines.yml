@@ -1,48 +1,23 @@
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
 trigger:
 - main
 
 pool:
   vmImage: ubuntu-latest
 
-stages:
-- stage: BuildAndTestDeploy
-  jobs:
-  - job: BuildJob
-    steps:
-    - task: configuration@1
-      inputs:
-        connection: 'ritam_test'
-        isTunnelActivate: false
-        isAppAutomate: true
-        isSmartUI: false
-
-    - script: |
-        mvn clean install -DskipTests
-      displayName: 'Maven Build'
-
-    - task: Cache@2
-      inputs:
-        key: 'maven | "$(Agent.OS)" | **/*.xml'
-        path: $(Agent.HomeDirectory)/.m2/repository
-        cacheHitVar: 'MavenCacheRestored'
-        displayName: 'Cache Maven dependencies'
-
-  - job: TestJob
-    dependsOn: BuildJob
-    steps:
-    - script: |
-        mvn test -D suite=single.xml
-      displayName: 'Run Tests'
-
-  - job: LambdatestResultsJob
-    dependsOn: TestJob
-    steps:
-    - task: LambdatestResults@1
-      # Configure inputs for the LambdatestResults task here
-      displayName: 'LambdaTest Results'
-
-  - job: DeployJob
-    dependsOn: LambdatestResultsJob
-    steps:
-    - script: ls la
-      displayName: 'Deploy to Production'
+steps:
+  - task: configuration@1
+    inputs:
+      connection: 'ritam_test'
+      isTunnelActivate: false
+      isAppAutomate: false
+      isSmartUI: false
+  - script: |
+      mvn clean install -DskipTests
+  - script: "mvn test -D suite=single.xml"
+    displayName: "Command Line Script"
+  - task: LambdatestResults@1
