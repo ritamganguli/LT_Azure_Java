@@ -17,24 +17,25 @@ public class TestNGTodo1 {
 
     private RemoteWebDriver driver;
     private String Status = "failed";
+    
 
     @BeforeMethod
     public void setup(Method m, ITestContext ctx) throws MalformedURLException {
         String username ="ritamg";
         String authkey = "TK7DCf2rFcBJzT3IHz4kD47lThhsHckrlGtiGkYyetAcixtrj5";
-        ;
         String hub = "@hub.lambdatest.com/wd/hub";
-
+        String file=System.getenv("LT_BUILD_NAME")
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("platform", "MacOS Catalina");
         caps.setCapability("browserName", "Safari");
         caps.setCapability("version", "latest");
-        caps.setCapability("build_name",System.getenv("LT_BUILD_NAME"));
-        caps.setCapability("build",System.getenv("LT_BUILD_NAME"));
+        caps.setCapability("build_name",file);
+        caps.setCapability("build",file);
         caps.setCapability("plugin", "git-testng");
 
         String[] Tags = new String[] { "Feature", "Falcon", "Severe" };
         caps.setCapability("tags", Tags);
+        System.out.println(file);
 
         driver = new RemoteWebDriver(new URL("https://" + username + ":" + authkey + hub), caps);
 
