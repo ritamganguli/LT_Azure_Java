@@ -10,16 +10,17 @@ stages:
   - job: BuildAndTestJob
     steps:
       - task: configuration@1
-        displayName: "LambdaTest configuration setup"
         inputs:
-          connection: ritam_test
+          connection: 'Lambda Test ADO pipeline'
+          isTunnelActivate: false
+      
       - script: |
           mvn clean install -DskipTests
       - script: "mvn test -D suite=single.xml"
         displayName: "Command Line Script"
       - task: LambdatestResults@1
-        displayName: "Lambdatest Results"
-
+        # displayName: "Lambdatest Results"
+        
 - stage: LambdatestResults
   jobs:
   - job: LambdatestResultsJob
