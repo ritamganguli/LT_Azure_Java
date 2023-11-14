@@ -11,8 +11,8 @@ stages:
     steps:
       - task: configuration@1
         inputs:
-          connection: 'Lambda Test ADO pipeline'
-          isTunnelActivate: false
+            connection: ritam_test
+            isTunnelActivate: false
       
       - script: |
           mvn clean install -DskipTests
