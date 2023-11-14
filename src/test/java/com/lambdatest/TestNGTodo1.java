@@ -24,7 +24,7 @@ public class TestNGTodo1 {
         String username ="ritamg";
         String authkey = "TK7DCf2rFcBJzT3IHz4kD47lThhsHckrlGtiGkYyetAcixtrj5";
         String hub = "@hub.lambdatest.com/wd/hub";
-        String file=System.getenv("LT_BUILD_NAME")
+        String file=System.getenv("LT_BUILD_NAME");
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("platform", "MacOS Catalina");
         caps.setCapability("browserName", "Safari");
