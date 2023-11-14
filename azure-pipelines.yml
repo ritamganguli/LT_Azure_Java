@@ -2,47 +2,15 @@ trigger:
 - main
 pool:
   vmImage: ubuntu-latest
-
-stages:
-- stage: Build
-  jobs:
-  - job: BuildJob
-    steps:
-    - task: configuration@1
-      inputs:
-        connection: 'ritam_test'
-        isTunnelActivate: false
-        isAppAutomate: false
-        isSmartUI: false
-
-    - script: |
-        mvn clean install -DskipTests
-      displayName: 'Maven Build'
-
-
-- stage: Test
-  dependsOn: Build
-  jobs:
-  - job: TestJob
-    steps:
-    - script: |
-        mvn test -D suite=single.xml
-      displayName: 'Run Tests'
-
-- stage: LambdatestResults
-  dependsOn: Test
-  jobs:
-  - job: LambdatestResultsJob
-    steps:
-    - task: LambdatestResults@1
-      # Configure inputs for the LambdatestResults task here
-      displayName: 'LambdaTest Results'
-
-- stage: Deploy
-  dependsOn: LambdatestResults
-  jobs:
-  - job: DeployJob
-    steps:
-    - script: |
-        # Add deployment script or commands here
-      displayName: 'Deploy to Production'
+steps:
+  - task: configuration@1
+    inputs:
+      connection: 'ritam_test'
+      isTunnelActivate: false
+      isAppAutomate: false
+      isSmartUI: false
+  - script: |
+      mvn clean install -DskipTests
+  - script: "mvn test -D suite=single.xml"
+    displayName: "Command Line Script"
+  - task: LambdatestResults@1
