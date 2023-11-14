@@ -20,9 +20,9 @@ stages:
       - task: LambdatestResults@1
         displayName: "Lambdatest Results"
 
-# - stage: LambdatestResults
-#   jobs:
-#   - job: LambdatestResultsJob
-#     steps:
-#       - script: |
-#           echo "Hello"
+- stage: LambdatestResults
+  jobs:
+  - job: LambdatestResultsJob
+    steps:
+      - script: |
+          echo "Hello"
